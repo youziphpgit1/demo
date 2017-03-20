@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link type="text/css" href="/demo/Public/Css/font-awesome.min.css" rel="stylesheet" />
+    <link type="text/css" href="/demo/Public/Css/bxslider.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/demo/Public/Css/swiper.min.css">
+    <link rel="stylesheet" type="text/css" href="/demo/Public/Css/animate.min.css" />
+    <link type="text/css" href="/demo/Public/Css/style.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="/demo/Public/Css/638m.css" />
+    <script type="text/javascript" src="/demo/Public/Js/jquery.min.js" ></script>
+    <title>太平洋消防器材</title>
+</head>
+<body>
+<div id="sitewapper">
+    <div id="sitecontent" class="transform">
+        <div id="header">
+            <div id="openlc" class="fl btn">
+                <div class="lcbody"><div class="lcitem top"><div class="rect top"></div></div><div class="lcitem bottom"><div class="rect bottom"></div></div></div>
+            </div>
+            <a class="title" href="#"><img src="images/logo.png" /></a>
+        </div>
+        <div class="scrollView">
+            <div id="indexPage" class="indexPage">
+
+
+                <div class="nav" id="float">
+                    <h1>
+                        <a href="#">
+                            <img src="images/logo.png">
+                        </a>
+                    </h1>
+                    <ul>
+                        <li><a href="index.html">首页</a></li>
+                        <li><a href="about.html">关于我们</a></li>
+                        <li><a href="news.html">资讯中心</a></li>
+                        <li><a href="product.html">亚辉产品</a></li>
+                        <li><a href="khjz.html">客户见证</a></li>
+                        <li><a href="hzhb.html">合作伙伴</a></li>
+                        <li><a href="contact.html" class="on">联系我们</a></li>
+                    </ul>
+
+    <span class="header_right">
+    <a href="#" class="cn_q">EN</a>
+    <dl>
+        <dt>
+            <input type="text" name="search" placeholder="Search..." class="fl"><input name="" type="button">
+            <input type="button" value="" class="fl submit">
+        </dt>
+        <dd></dd>
+    </dl>
+    </span>
+                </div>
+
+
+
+
+                <div id="wrap" class="my-map">
+                    <div id="mapContainer"></div>
+                </div>
+                <script src="http://webapi.amap.com/maps?v=1.2&key=8325164e247e15eea68b59e89200988b"></script>
+                <script>
+                    !function(){
+                        var infoWindow, map, level = 14,
+                                center = {lng: 120.414233, lat: 30.245392},
+                                features = [{type: "Marker", name: "杭州亚辉包装科技有限公司", desc: "联系电话： 0571 82913827<br />林先生：139-5752-0529<br />徐先生：180-5866-1586", color: "red", icon: "cir", offset: {x: -9, y: -31}, lnglat: {lng: 120.414233, lat: 30.245392}}];
+
+                        function loadFeatures(){
+                            for(var feature, data, i = 0, len = features.length, j, jl, path; i < len; i++){
+                                data = features[i];
+                                switch(data.type){
+                                    case "Marker":
+                                        feature = new AMap.Marker({ map: map, position: new AMap.LngLat(data.lnglat.lng, data.lnglat.lat),
+                                            zIndex: 3, extData: data, offset: new AMap.Pixel(data.offset.x, data.offset.y), title: data.name,
+                                            content: '<div class="icon icon-' + data.icon + ' icon-'+ data.icon +'-' + data.color +'"></div>' });
+                                        break;
+                                    case "Polyline":
+                                        for(j = 0, jl = data.lnglat.length, path = []; j < jl; j++){
+                                            path.push(new AMap.LngLat(data.lnglat[j].lng, data.lnglat[j].lat));
+                                        }
+                                        feature = new AMap.Polyline({ map: map, path: path, extData: data, zIndex: 2,
+                                            strokeWeight: data.strokeWeight, strokeColor: data.strokeColor, strokeOpacity: data.strokeOpacity });
+                                        break;
+                                    case "Polygon":
+                                        for(j = 0, jl = data.lnglat.length, path = []; j < jl; j++){
+                                            path.push(new AMap.LngLat(data.lnglat[j].lng, data.lnglat[j].lat));
+                                        }
+                                        feature = new AMap.Polygon({ map: map, path: path, extData: data, zIndex: 1,
+                                            strokeWeight: data.strokeWeight, strokeColor: data.strokeColor, strokeOpacity: data.strokeOpacity,
+                                            fillColor: data.fillColor, fillOpacity: data.fillOpacity });
+                                        break;
+                                    default: feature = null;
+                                }
+                                if(feature){ AMap.event.addListener(feature, "click", mapFeatureClick); }
+                            }
+                        }
+
+                        function mapFeatureClick(e){
+                            if(!infoWindow){ infoWindow = new AMap.InfoWindow({autoMove: true}); }
+                            var extData = e.target.getExtData();
+                            infoWindow.setContent("<h5>" + extData.name + "</h5><div>" + extData.desc + "</div>");
+                            infoWindow.open(map, e.lnglat);
+                        }
+
+                        map = new AMap.Map("mapContainer", {center: new AMap.LngLat(center.lng, center.lat), level: level, scrollWheel: false});
+
+                        loadFeatures();
+                        map.plugin(["AMap.ToolBar", "AMap.Scale"], function(){
+                            map.addControl(new AMap.ToolBar({ruler: false, direction: false, locate: false}));
+                            map.addControl(new AMap.Scale);
+                        });
+                    }();
+                </script>
+
+                <div class="contact_xx">
+                    <h1>杭州亚辉包装科技有限公司</h1>
+                    <p>地址：中国 浙江 杭州市萧山区 南阳街道红山村<br>全国采购热线：0571-82913827<br>邮箱：<br>林先生：139-5752-0529/徐先生：180-5866-1586</p>
+                </div>
+
+                <div class="zx_nr">
+                    <div class="center_main">
+                        <h1 class="wow fadeInLeft"data-wow-delay="0.1s">在线留言</h1>
+                        <ul class="wow fadeInUp"  data-wow-delay="0.6s">
+                            <li><input class="form_su" name="wechat" placeholder="姓名" type="text" datatype="*" errormsg="姓名" nullmsg="姓名"></li>
+                            <li><input class="form_su" name="wechat" placeholder="手机" type="text" datatype="*" errormsg="手机" nullmsg="手机"></li>
+                            <li><input class="form_su" name="wechat" placeholder="邮箱" type="text" datatype="*" errormsg="邮箱" nullmsg="邮箱"></li>
+                            <li><input class="form_su" name="wechat" placeholder="QQ：" type="text" datatype="*" errormsg="QQ" nullmsg="QQ"></li>
+                            <li><textarea name="" class="text_t1" placeholder="内容" cols="" rows=""></textarea></li>
+                        </ul>
+                        <h5 class="wow fadeInUp"  data-wow-delay="0.6s"><a href="#">提交</a></h5>
+                    </div>
+                </div>
+
+
+
+                <div class="footer">
+                    <h1 class="wow fadeInUp"data-wow-delay="0.1s">
+                        <a href="index.html">首 页</a><b>/</b>
+                        <a href="about.html">关于我们</a><b>/</b>
+                        <a href="news.html">资讯中心</a><b>/</b>
+                        <a href="product.html">亚辉产品</a><b>/</b>
+                        <a href="khjz.html">客户见证</a><b>/</b>
+                        <a href="hzhb.html">合作伙伴</a><b>/</b>
+                        <a href="contact.html">联系我们</a>
+                    </h1>
+                    <p class="wow fadeInUp"data-wow-delay="0.2s">©2016 杭州亚辉包装科技有限公司&nbsp;&nbsp;&nbsp;&nbsp;网站建设：<a href="http://www.aoshihu.com">傲视信息</a></p>
+                </div>
+
+
+
+                <div id="mcontact" class="module">
+                </div>
+            </div>
+            <div id="footer">
+
+            </div>
+        </div>
+        <div id="bgmask" class="iPage hide"></div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    // 固定层
+    function buffer(a,b,c){
+        var d;
+        return function(){
+            if(d)
+                return;
+            d=setTimeout(function(){
+                a.call(this),d=undefined
+            },b)
+        }
+    }
+
+
+    $(document).ready(function(){
+        $('.scrollView').scroll(function(){
+            var float_top = $('.scrollView').scrollTop();
+            console.log(float_top);
+            if(float_top > 690) {
+                $('#float').addClass('stuckMenu');
+            } else {
+                $('#float').removeClass('stuckMenu');
+            }
+        });
+    });
+
+</script>
+
+<script src="js/swiper.min.js"></script>
+
+
+<script>
+    var swiper = new Swiper('.banner .swiper-container', {
+        pagination: '.banner .swiper-pagination',
+        nextButton: '.banner .swiper-button-next',
+        prevButton: '.banner .swiper-button-prev',
+        slidesPerView: 1,
+        paginationClickable: true,
+        spaceBetween: 30,
+        loop: true
+    });
+</script>
+
+<script>
+    var swiper = new Swiper('.ry_nr .swiper-container', {
+        pagination: '.ry_nr .swiper-pagination',
+        nextButton: '.ry_nr .swiper-button-next',
+        prevButton: '.ry_nr .swiper-button-prev',
+        slidesPerView: 1,
+        paginationClickable: true,
+        spaceBetween: 30,
+        loop: true
+    });
+</script>
+<script type="text/javascript" src="js/zepto.min.js"></script>
+<script type="text/javascript" src="js/wow.min.js"></script>
+<script type="text/javascript">$(function(){new WOW({scrollContainer:".scrollView"}).init();})</script>
+
+<script type="text/javascript" src="js/org.min.js" data-main="IndexMain"></script>
+
+
+
+
+<div style="display:none"></div>
+</body>
+</html>
